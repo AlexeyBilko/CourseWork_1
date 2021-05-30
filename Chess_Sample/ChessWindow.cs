@@ -16,7 +16,7 @@ namespace Chess_Sample
         {
             InitializeComponent();
             Height = 545;
-            Width = 800;
+            Width = 1030;
         }
 
         ChessBoard board;
@@ -34,12 +34,16 @@ namespace Chess_Sample
             comboBox_FigureName.Items.Add(Type.Bishop.ToString());
             comboBox_FigureName.Items.Add(Type.King.ToString());
             comboBox_FigureName.Items.Add(Type.Knight.ToString());
+            list = new List<string>();
+            listBox.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             board.ClearCanMove();
         }
+
+        List<string> list;
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -53,6 +57,13 @@ namespace Chess_Sample
                 tmp = tmp.Substring(0, 7)+ "(...)" + tmp.Substring(tmp.LastIndexOf('.'));
             filename_label.Text = tmp;
             board = new ChessBoard(this, filename);
+            
+            list = board.CanBeatInfoToListBox();
+            listBox.Items.Clear();
+            foreach (var item in list)
+            {
+                listBox.Items.Add(item);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -60,13 +71,21 @@ namespace Chess_Sample
             board.ClearCanMove();
             board.ClearBoard();
             filename_label.Text = "-";
+            listBox.Items.Clear();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             if ((int)numericUpDown_Y.Value >= 1 && (int)numericUpDown_Y.Value <= 8 && (int)numericUpDown_X.Value >= 1 && (int)numericUpDown_X.Value <= 8)
                 if (comboBox_FigureName.SelectedItem != null)
+                {
                     board.AddNewFigure(comboBox_FigureName.SelectedItem.ToString(), (int)numericUpDown_Y.Value - 1, (int)numericUpDown_X.Value - 1);
+                    listBox.Items.Clear();
+                    foreach (var item in list)
+                    {
+                        listBox.Items.Add(item);
+                    }
+                }
                 else return;
             else return;
         }
@@ -84,8 +103,35 @@ namespace Chess_Sample
         private void button6_Click(object sender, EventArgs e)
         {
             if ((int)numericUpDown_Y.Value >= 1 && (int)numericUpDown_Y.Value <= 8 && (int)numericUpDown_X.Value >= 1 && (int)numericUpDown_X.Value <= 8)
+            {
                 board.RemoveFigure((int)numericUpDown_Y_R.Value - 1, (int)numericUpDown_X_R.Value - 1);
+                board.ClearCanMove();
+                list = board.CanBeatInfoToListBox();
+                listBox.Items.Clear();
+                foreach (var item in list)
+                {
+                    listBox.Items.Add(item);
+                }
+            }
             else return;
+        }
+
+        private void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listBox.SelectedItem.ToString().Substring(0, 2) != "->")
+                {
+                    string tmp = listBox.SelectedItem.ToString();
+                    int Y = int.Parse(tmp.Substring(tmp.IndexOf(' ') + 5, 1));
+                    int X = int.Parse(tmp.Substring(tmp.IndexOf(' ') + 10, 1));
+                    ChessBoard.cells[Y - 1, X - 1].ShowClick();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Something went wrong");
+            }
         }
     }
 }

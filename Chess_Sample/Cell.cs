@@ -19,12 +19,9 @@ namespace Chess_Sample
     public partial class Cell : UserControl
     {
         public Figure figure;
-        public Location location;
-        public Color color;
-        FigureMovement figureMovement;
-
-        public byte GetY { get { return location.y; } }
-        public byte GetX { get { return location.x; } }
+        Location location;
+        Color color;
+        public FigureMovement figureMovement;
 
         public static Dictionary<string, Image> FiguresImages = new Dictionary<string, Image>
         {
@@ -66,6 +63,25 @@ namespace Chess_Sample
 
         private void ClickOnCell(object sender, EventArgs e)
         {
+            //if (figure != null)
+            //{
+            //    for (int x = 0; x < 8; x++)
+            //    {
+            //        for (int y = 0; y < 8; y++)
+            //        {
+            //            if (ChessBoard.cells[y, x].figure != null)
+            //                ChessBoard.cells[y, x].image.BackgroundImage = Cell.FiguresImages[ChessBoard.cells[y, x].figure.GetFigureImageName()];
+            //        }
+            //    }
+            //    image.BackgroundImage = Cell.FiguresImages[figure.getWhiteFigureName()];
+            //    figureMovement = new FigureMovement(this);
+            //    figureMovement.ShowMove(true);
+            //}
+            ShowClick();
+        }
+        
+        public void ShowClick()
+        {
             if (figure != null)
             {
                 for (int x = 0; x < 8; x++)
@@ -81,7 +97,6 @@ namespace Chess_Sample
                 figureMovement.ShowMove(true);
             }
         }
-        
 
         public void CanMoveHere(bool can)
         {

@@ -27,6 +27,32 @@ namespace Chess_Sample
             figureCanBeat = FigureCanMoveHere();
         }
 
+        public List<string> canbeat;
+
+        public List<string> CanBeat()
+        {
+            canbeat = new List<string>();
+            canbeat.Add($"{currentCell.figure.figureType.ToString()} (Y: {currentCell.figure.startY + 1} X: {currentCell.figure.startX + 1}) can beat: ");
+            int counter = 0;
+            if (figureCanBeat == null)
+                return null;
+            foreach (var item in figureCanBeat)
+            {
+                if (ChessBoard.cells[item.y, item.x].figure != null)
+                {
+                    canbeat.Add("->" + ChessBoard.cells[item.y, item.x].figure.figureType.ToString() + " (Y: " + (ChessBoard.cells[item.y, item.x].figure.startY + 1) + " X: " + (ChessBoard.cells[item.y, item.x].figure.startX + 1) + ")");
+                    counter++;
+                }
+            }
+            if(counter == 0)
+            {
+                canbeat.RemoveAt(0);
+                canbeat.Add($"{currentCell.figure.figureType.ToString()} (Y: {currentCell.figure.startY + 1} X: {currentCell.figure.startX + 1}) can not beat any figure");
+            }
+
+            return canbeat;
+        }
+
         List<Move> FigureCanMoveHere()
         {
             List<Move> buf = new List<Move>();

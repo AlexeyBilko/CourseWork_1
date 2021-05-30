@@ -16,6 +16,31 @@ namespace Chess_Sample
 
         public static ChessWindow window;
 
+        public static List<string> figuresCanBeat;
+
+        public List<string> CanBeatInfoToListBox()
+        {
+            figuresCanBeat = new List<string>();
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (cells[i, j].figure != null)
+                    {
+                        List<string> buf = cells[i, j].figureMovement.CanBeat();
+                        if (buf != null)
+                        {
+                            foreach (var item in buf)
+                            {
+                                figuresCanBeat.Add(item);
+                            }
+                        }
+                    }
+                }
+            }
+            return figuresCanBeat;
+        }
+
         public ChessBoard(ChessWindow chess)
         {
             window = chess;
@@ -79,11 +104,24 @@ namespace Chess_Sample
 
         public void AddNewFigure(string type, int y, int x)
         {
+            if(figuresOnBoard.Count == 10)
+            {
+                MessageBox.Show("There are 10 figures on chess board, to add a new figure, remove some figure");
+                return;
+            }
             if (cells[y, x].figure == null)
             {
                 figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), type), y, x));
                 SetFigures();
                 cells[y, x].image.BackgroundImage = Cell.FiguresImages[cells[y, x].figure.GetFigureImageName()];
+                List<string> buf = cells[y, x].figureMovement.CanBeat();
+                if (buf != null)
+                {
+                    foreach (var item in buf)
+                    {
+                        figuresCanBeat.Add(item);
+                    }
+                }
             }
             else MessageBox.Show($"The figure \"{cells[y,x].figure.figureType.ToString()}\" is already located at the Y - {(y + 1)}, X - {(x + 1)}");
         }
@@ -125,6 +163,7 @@ namespace Chess_Sample
             foreach (var item in figuresOnBoard)
             {
                 cells[item.startY, item.startX].figure = item;
+                cells[item.startY, item.startX].figureMovement = new FigureMovement(cells[item.startY, item.startX]); //
             }
         }
 
@@ -132,11 +171,22 @@ namespace Chess_Sample
         public void GetFiguresFromFile(string path)
         {
             List<string> data = File.ReadAllLines(path).ToList();
-
-            foreach (var figure in data)
+            if (data.Count >= 1 && data.Count <= 10)
             {
-                string[] buffer = figure.Split(' ');
-                figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[1]) - 1, Convert.ToInt32(buffer[2]) - 1));
+                foreach (var figure in data)
+                {
+                    string[] buffer = figure.Split(' ');
+                    figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[1]) - 1, Convert.ToInt32(buffer[2]) - 1));
+                }
+            }
+            else if(data.Count > 10)
+            {
+                int tmp = figuresOnBoard.Count;
+                for (int i = 0; i < 10 - tmp; i++)
+                {
+                    string[] buffer = data[i].Split(' ');
+                    figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[1]) - 1, Convert.ToInt32(buffer[2]) - 1));
+                }
             }
 
             IfDataCorrect(figuresOnBoard);
@@ -163,9 +213,9 @@ namespace Chess_Sample
                 {
                     if(i != j && figures[i].startX == figures[j].startX && figures[i].startY == figures[j].startY)
                     {
-                        var result = MessageBox.Show("Input data error", "Some of figures have the same coordinates!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        if (result == DialogResult.OK)
-                            Environment.Exit(0);
+                        MessageBox.Show("Input data error", "Some of figures have the same coordinates!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //if (result == DialogResult.OK)
+                        //    Environment.Exit(0);
                     }
                 }
             }

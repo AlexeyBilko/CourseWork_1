@@ -49,6 +49,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.numericUpDown_Y_R = new System.Windows.Forms.NumericUpDown();
             this.button6 = new System.Windows.Forms.Button();
+            this.listBox = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Y)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_X)).BeginInit();
@@ -102,6 +103,7 @@
             this.groupBox1.Size = new System.Drawing.Size(331, 78);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Load from File";
             // 
             // button3
             // 
@@ -211,6 +213,7 @@
             this.groupBox2.Size = new System.Drawing.Size(331, 152);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Add Figure";
             // 
             // button5
             // 
@@ -255,6 +258,7 @@
             this.groupBox5.Size = new System.Drawing.Size(331, 107);
             this.groupBox5.TabIndex = 15;
             this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Remove Figure";
             // 
             // label3
             // 
@@ -331,11 +335,23 @@
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // listBox
+            // 
+            this.listBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.listBox.FormattingEnabled = true;
+            this.listBox.ItemHeight = 16;
+            this.listBox.Location = new System.Drawing.Point(1016, 21);
+            this.listBox.Name = "listBox";
+            this.listBox.Size = new System.Drawing.Size(297, 452);
+            this.listBox.TabIndex = 16;
+            this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
+            // 
             // ChessWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1016, 608);
+            this.ClientSize = new System.Drawing.Size(1325, 608);
+            this.Controls.Add(this.listBox);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -384,6 +400,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_X_R;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown numericUpDown_Y_R;
+        private System.Windows.Forms.ListBox listBox;
     }
 }
 
