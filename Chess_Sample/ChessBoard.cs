@@ -104,6 +104,10 @@ namespace Chess_Sample
 
         public void AddNewFigure(string type, int y, int x)
         {
+            if(figuresCanBeat == null)
+            {
+                figuresCanBeat = new List<string>();
+            }
             if(figuresOnBoard.Count == 10)
             {
                 MessageBox.Show("There are 10 figures on chess board, to add a new figure, remove some figure");
@@ -216,6 +220,18 @@ namespace Chess_Sample
                         MessageBox.Show("Input data error", "Some of figures have the same coordinates!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //if (result == DialogResult.OK)
                         //    Environment.Exit(0);
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
                     }
                 }
             }

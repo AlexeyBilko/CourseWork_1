@@ -38,14 +38,15 @@ namespace Chess_Sample
             listBox.Enabled = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        //
+        private void ClearCanMove_Click(object sender, EventArgs e)
         {
             board.ClearCanMove();
         }
 
         List<string> list;
 
-        private void button2_Click(object sender, EventArgs e)
+        private void OpenFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog f = new OpenFileDialog();
             f.Filter = "Text files(*.txt)|*.txt";
@@ -66,7 +67,7 @@ namespace Chess_Sample
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void ClearBoard_Click(object sender, EventArgs e)
         {
             board.ClearCanMove();
             board.ClearBoard();
@@ -74,7 +75,7 @@ namespace Chess_Sample
             listBox.Items.Clear();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void AddFigure_Click(object sender, EventArgs e)
         {
             if ((int)numericUpDown_Y.Value >= 1 && (int)numericUpDown_Y.Value <= 8 && (int)numericUpDown_X.Value >= 1 && (int)numericUpDown_X.Value <= 8)
                 if (comboBox_FigureName.SelectedItem != null)
@@ -90,7 +91,7 @@ namespace Chess_Sample
             else return;
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void SaveInFile_Click(object sender, EventArgs e)
         {
             SaveFileDialog s = new SaveFileDialog();
             s.Filter = "Text files(*.txt)|*.txt";
@@ -100,7 +101,7 @@ namespace Chess_Sample
             board.SaveFiguresToFile(filepath);
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void RemoveFigure_Click(object sender, EventArgs e)
         {
             if ((int)numericUpDown_Y.Value >= 1 && (int)numericUpDown_Y.Value <= 8 && (int)numericUpDown_X.Value >= 1 && (int)numericUpDown_X.Value <= 8)
             {
@@ -126,6 +127,10 @@ namespace Chess_Sample
                     int Y = int.Parse(tmp.Substring(tmp.IndexOf(' ') + 5, 1));
                     int X = int.Parse(tmp.Substring(tmp.IndexOf(' ') + 10, 1));
                     ChessBoard.cells[Y - 1, X - 1].ShowClick();
+                }
+                else
+                {
+                    board.ClearCanMove();
                 }
             }
             catch (Exception)

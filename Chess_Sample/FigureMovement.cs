@@ -55,59 +55,59 @@ namespace Chess_Sample
 
         List<Move> FigureCanMoveHere()
         {
-            List<Move> buf = new List<Move>();
+            List<Move> moves = new List<Move>();
             switch (currentCell.figure.figureType)
             {
                 case Type.Rook:
-                    Line(ref buf);
+                    Line(ref moves);
 
                     break;
                 case Type.Knight:
                     if(currentCell.figure.startY - 2 > 0 || currentCell.figure.startX - 1 > 0)
-                        buf.Add(new Move(currentCell.figure.startY - 2,currentCell.figure.startX - 1));
+                        moves.Add(new Move(currentCell.figure.startY - 2,currentCell.figure.startX - 1));
                     if (currentCell.figure.startY - 2 > 0 && currentCell.figure.startX + 1 < 8)
-                        buf.Add(new Move(currentCell.figure.startY - 2, currentCell.figure.startX + 1));
+                        moves.Add(new Move(currentCell.figure.startY - 2, currentCell.figure.startX + 1));
                     if (currentCell.figure.startY - 1 > 0 && currentCell.figure.startX - 2 > 0)
-                        buf.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX - 2));
+                        moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX - 2));
                     if (currentCell.figure.startY - 1 > 0 && currentCell.figure.startX + 2 < 8)
-                        buf.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX + 2));
+                        moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX + 2));
                     if (currentCell.figure.startY + 1 < 8 && currentCell.figure.startX - 2 > 0)
-                        buf.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX - 2));
+                        moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX - 2));
                     if (currentCell.figure.startY + 1 < 8 && currentCell.figure.startX + 2 < 8)
-                        buf.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX + 2));
-                    if (currentCell.figure.startY + 2 < 8 && currentCell.figure.startX - 1 > 0)
-                        buf.Add(new Move(currentCell.figure.startY + 2, currentCell.figure.startX - 1));
+                        moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX + 2));
+                    /**/if (currentCell.figure.startY + 2 < 8 && currentCell.figure.startX - 1 > 0)
+                        moves.Add(new Move(currentCell.figure.startY + 2, currentCell.figure.startX - 1));
                     if (currentCell.figure.startY + 2 < 8 && currentCell.figure.startX + 1 < 8)
-                        buf.Add(new Move(currentCell.figure.startY + 2, currentCell.figure.startX + 1));
+                        moves.Add(new Move(currentCell.figure.startY + 2, currentCell.figure.startX + 1));
                     break;
                 case Type.Bishop:
-                    Diagonal(ref buf);
+                    Diagonal(ref moves);
 
                     break;
                 case Type.Queen:
-                    Line(ref buf);
-                    Diagonal(ref buf);
+                    Line(ref moves);
+                    Diagonal(ref moves);
                     break;
                 case Type.King:
-                    buf.Add(new Move(currentCell.figure.startY, currentCell.figure.startX - 1));
-                    buf.Add(new Move(currentCell.figure.startY, currentCell.figure.startX + 1));
-                    buf.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX));
-                    buf.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX));
-                    buf.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX - 1));
-                    buf.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX + 1));
-                    buf.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX - 1));
-                    buf.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX + 1));
+                    moves.Add(new Move(currentCell.figure.startY, currentCell.figure.startX - 1));
+                    moves.Add(new Move(currentCell.figure.startY, currentCell.figure.startX + 1));
+                    moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX));
+                    moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX));
+                    moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX - 1));
+                    moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX + 1));
+                    moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX - 1));
+                    moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX + 1));
                     break;
                 case Type.Pawn:
                     if(currentCell.figure.startY - 1 >= 0 && currentCell.figure.startX - 1 >= 0)
-                        buf.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX - 1));
+                        moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX - 1));
                     if (currentCell.figure.startY - 1 >= 0 && currentCell.figure.startX + 1 < 8)
-                        buf.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX + 1));
+                        moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX + 1));
                     break;
                 default:
                     break;
             }
-            return buf;
+            return moves;
         }
 
         private void Line(ref List<Move> buf)
@@ -318,24 +318,7 @@ namespace Chess_Sample
             }
         }
 
-        //Move? Destination(int y, int x)
-        //{
-        //    int Y = currentCell.location.y + y;
-        //    int X = currentCell.location.x + x;
-        //    move++;
-
-        //    if (isAccessAble(y, x))
-        //    {
-        //        if (!ChessBoard.cells[y, x].isEmpty())
-        //        {
-        //            return new Move(Y, X);
-        //        }
-        //        return previousMove = new Move(Y, X);
-        //    }
-        //    else return previousMove = null;
-        //}
-
-        public bool isAccessAble(int y, int x) => y < 8 && y >= 0 && x < 8 && x >= 0;
+        public bool isAccessable(int y, int x) => y < 8 && y >= 0 && x < 8 && x >= 0;
         public bool isCellEmpty(int y, int x) => ChessBoard.cells[y, x].isEmpty();
     }
 }

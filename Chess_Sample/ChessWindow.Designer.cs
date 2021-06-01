@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.ClearSelectionButton = new System.Windows.Forms.Button();
+            this.LoadFromFile = new System.Windows.Forms.Button();
             this.filename_label = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.ClearBoardButton = new System.Windows.Forms.Button();
             this.comboBox_FigureName = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDown_Y = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_X = new System.Windows.Forms.NumericUpDown();
-            this.button4 = new System.Windows.Forms.Button();
+            this.AddFigureButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.SaveInFile = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -48,7 +48,7 @@
             this.numericUpDown_X_R = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.numericUpDown_Y_R = new System.Windows.Forms.NumericUpDown();
-            this.button6 = new System.Windows.Forms.Button();
+            this.RemoveFigure = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Y)).BeginInit();
@@ -61,28 +61,28 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Y_R)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // ClearSelectionButton
             // 
-            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.Location = new System.Drawing.Point(16, 21);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 35);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Clear Selection";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ClearSelectionButton.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClearSelectionButton.FlatAppearance.BorderSize = 0;
+            this.ClearSelectionButton.Location = new System.Drawing.Point(16, 21);
+            this.ClearSelectionButton.Name = "ClearSelectionButton";
+            this.ClearSelectionButton.Size = new System.Drawing.Size(129, 35);
+            this.ClearSelectionButton.TabIndex = 0;
+            this.ClearSelectionButton.Text = "Clear Selection";
+            this.ClearSelectionButton.UseVisualStyleBackColor = false;
+            this.ClearSelectionButton.Click += new System.EventHandler(this.ClearCanMove_Click);
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button2.Location = new System.Drawing.Point(212, 21);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(113, 46);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Load File (.txt)";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.LoadFromFile.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.LoadFromFile.Location = new System.Drawing.Point(212, 21);
+            this.LoadFromFile.Name = "button2";
+            this.LoadFromFile.Size = new System.Drawing.Size(113, 46);
+            this.LoadFromFile.TabIndex = 1;
+            this.LoadFromFile.Text = "Load File (.txt)";
+            this.LoadFromFile.UseVisualStyleBackColor = false;
+            this.LoadFromFile.Click += new System.EventHandler(this.OpenFile_Click);
             // 
             // filename_label
             // 
@@ -97,7 +97,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.filename_label);
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.LoadFromFile);
             this.groupBox1.Location = new System.Drawing.Point(665, 101);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(331, 78);
@@ -105,16 +105,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Load from File";
             // 
-            // button3
+            // ClearBoardButton
             // 
-            this.button3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button3.Location = new System.Drawing.Point(185, 21);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(129, 35);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Clear board";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.ClearBoardButton.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClearBoardButton.Location = new System.Drawing.Point(185, 21);
+            this.ClearBoardButton.Name = "ClearBoardButton";
+            this.ClearBoardButton.Size = new System.Drawing.Size(129, 35);
+            this.ClearBoardButton.TabIndex = 4;
+            this.ClearBoardButton.Text = "Clear board";
+            this.ClearBoardButton.UseVisualStyleBackColor = false;
+            this.ClearBoardButton.Click += new System.EventHandler(this.ClearBoard_Click);
             // 
             // comboBox_FigureName
             // 
@@ -189,21 +189,21 @@
             0,
             0});
             // 
-            // button4
+            // AddFigureButton
             // 
-            this.button4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button4.Location = new System.Drawing.Point(100, 98);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(140, 35);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "Add Figure";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.AddFigureButton.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.AddFigureButton.Location = new System.Drawing.Point(100, 98);
+            this.AddFigureButton.Name = "AddFigureButton";
+            this.AddFigureButton.Size = new System.Drawing.Size(140, 35);
+            this.AddFigureButton.TabIndex = 10;
+            this.AddFigureButton.Text = "Add Figure";
+            this.AddFigureButton.UseVisualStyleBackColor = false;
+            this.AddFigureButton.Click += new System.EventHandler(this.AddFigure_Click);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.comboBox_FigureName);
-            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.AddFigureButton);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.numericUpDown_X);
             this.groupBox2.Controls.Add(this.label1);
@@ -217,18 +217,18 @@
             // 
             // button5
             // 
-            this.button5.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button5.Location = new System.Drawing.Point(116, 30);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(113, 46);
-            this.button5.TabIndex = 12;
-            this.button5.Text = "Save to File (.txt)";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.SaveInFile.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.SaveInFile.Location = new System.Drawing.Point(116, 30);
+            this.SaveInFile.Name = "button5";
+            this.SaveInFile.Size = new System.Drawing.Size(113, 46);
+            this.SaveInFile.TabIndex = 12;
+            this.SaveInFile.Text = "Save to File (.txt)";
+            this.SaveInFile.UseVisualStyleBackColor = false;
+            this.SaveInFile.Click += new System.EventHandler(this.SaveInFile_Click);
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button5);
+            this.groupBox3.Controls.Add(this.SaveInFile);
             this.groupBox3.Location = new System.Drawing.Point(665, 498);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(331, 98);
@@ -238,8 +238,8 @@
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox4.Controls.Add(this.button3);
-            this.groupBox4.Controls.Add(this.button1);
+            this.groupBox4.Controls.Add(this.ClearBoardButton);
+            this.groupBox4.Controls.Add(this.ClearSelectionButton);
             this.groupBox4.Location = new System.Drawing.Point(665, 12);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(331, 73);
@@ -248,7 +248,7 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.button6);
+            this.groupBox5.Controls.Add(this.RemoveFigure);
             this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.numericUpDown_X_R);
             this.groupBox5.Controls.Add(this.label4);
@@ -326,14 +326,14 @@
             // 
             // button6
             // 
-            this.button6.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button6.Location = new System.Drawing.Point(203, 28);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(102, 52);
-            this.button6.TabIndex = 14;
-            this.button6.Text = "Remove figure";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.RemoveFigure.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.RemoveFigure.Location = new System.Drawing.Point(203, 28);
+            this.RemoveFigure.Name = "button6";
+            this.RemoveFigure.Size = new System.Drawing.Size(102, 52);
+            this.RemoveFigure.TabIndex = 14;
+            this.RemoveFigure.Text = "Remove figure";
+            this.RemoveFigure.UseVisualStyleBackColor = false;
+            this.RemoveFigure.Click += new System.EventHandler(this.RemoveFigure_Click);
             // 
             // listBox
             // 
@@ -379,23 +379,23 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button ClearSelectionButton;
+        private System.Windows.Forms.Button LoadFromFile;
         private System.Windows.Forms.Label filename_label;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button ClearBoardButton;
         private System.Windows.Forms.ComboBox comboBox_FigureName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericUpDown_Y;
         private System.Windows.Forms.NumericUpDown numericUpDown_X;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button AddFigureButton;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button SaveInFile;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button RemoveFigure;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numericUpDown_X_R;
         private System.Windows.Forms.Label label4;
