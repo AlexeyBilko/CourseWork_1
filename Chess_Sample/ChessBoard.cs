@@ -126,6 +126,16 @@ namespace Chess_Sample
                         figuresCanBeat.Add(item);
                     }
                 }
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (ChessBoard.cells[y, x].figure != null)
+                            ChessBoard.cells[y, x].image.BackgroundImage = Cell.FiguresImages[ChessBoard.cells[y, x].figure.GetFigureImageName()];
+                        cells[i, j].ClearCanMove();
+                    }
+                }
+
             }
             else MessageBox.Show($"The figure \"{cells[y,x].figure.figureType.ToString()}\" is already located at the Y - {(y + 1)}, X - {(x + 1)}");
         }
@@ -174,26 +184,34 @@ namespace Chess_Sample
         /*Work with file*/
         public void GetFiguresFromFile(string path)
         {
-            List<string> data = File.ReadAllLines(path).ToList();
-            if (data.Count >= 1 && data.Count <= 10)
+            try
             {
-                foreach (var figure in data)
+                List<string> data = File.ReadAllLines(path).ToList();
+                if (data.Count >= 1 && data.Count <= 10)
                 {
-                    string[] buffer = figure.Split(' ');
-                    figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[1]) - 1, Convert.ToInt32(buffer[2]) - 1));
+                    foreach (var figure in data)
+                    {
+                        string[] buffer = figure.Split(' ');
+                        
+                        figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[2]) - 1, Convert.ToInt32(buffer[1]) - 1));
+                    }
                 }
-            }
-            else if(data.Count > 10)
-            {
-                int tmp = figuresOnBoard.Count;
-                for (int i = 0; i < 10 - tmp; i++)
+                else if (data.Count > 10)
                 {
-                    string[] buffer = data[i].Split(' ');
-                    figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[1]) - 1, Convert.ToInt32(buffer[2]) - 1));
+                    int tmp = figuresOnBoard.Count;
+                    for (int i = 0; i < 10 - tmp; i++)
+                    {
+                        string[] buffer = data[i].Split(' ');
+                        figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[2]) - 1, Convert.ToInt32(buffer[1]) - 1));
+                    }
                 }
-            }
 
-            IfDataCorrect(figuresOnBoard);
+                IfDataCorrect(figuresOnBoard);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Input data error", "Wrong File!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         public void SaveFiguresToFile(string path)
@@ -202,7 +220,7 @@ namespace Chess_Sample
 
             foreach (var item in figuresOnBoard)
             {
-                buf.Add(item.figureType.ToString() + " " + (item.startY + 1) + " " + (item.startX + 1));
+                buf.Add(item.figureType.ToString() + " " + (item.startX + 1) + " " + (item.startY + 1));
             }
 
             File.WriteAllText(path, "");
@@ -218,20 +236,8 @@ namespace Chess_Sample
                     if(i != j && figures[i].startX == figures[j].startX && figures[i].startY == figures[j].startY)
                     {
                         MessageBox.Show("Input data error", "Some of figures have the same coordinates!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        //if (result == DialogResult.OK)
-                        //    Environment.Exit(0);
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
+                        figuresOnBoard = new List<Figure>();
+                        return;
                     }
                 }
             }

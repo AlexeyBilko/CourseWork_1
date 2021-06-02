@@ -81,6 +81,7 @@ namespace Chess_Sample
                 if (comboBox_FigureName.SelectedItem != null)
                 {
                     board.AddNewFigure(comboBox_FigureName.SelectedItem.ToString(), (int)numericUpDown_Y.Value - 1, (int)numericUpDown_X.Value - 1);
+                    list = board.CanBeatInfoToListBox();
                     listBox.Items.Clear();
                     foreach (var item in list)
                     {

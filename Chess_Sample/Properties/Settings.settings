@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ChessApp" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Form1</Value>
+      <Value Profile="(Default)">Chess Figures</Value>
     </Setting>
   </Settings>
 </SettingsFile>

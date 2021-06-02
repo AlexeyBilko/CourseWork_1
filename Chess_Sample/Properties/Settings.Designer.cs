@@ -25,7 +25,7 @@ namespace Chess_Sample.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Form1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Chess Figures")]
         public string ChessApp {
             get {
                 return ((string)(this["ChessApp"]));

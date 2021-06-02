@@ -38,7 +38,7 @@ namespace Chess_Sample
                 return null;
             foreach (var item in figureCanBeat)
             {
-                if (ChessBoard.cells[item.y, item.x].figure != null)
+                if (item.y >= 0 && item.y <= 7 && item.x >= 0 && item.y <= 7 && ChessBoard.cells[item.y, item.x].figure != null)
                 {
                     canbeat.Add("->" + ChessBoard.cells[item.y, item.x].figure.figureType.ToString() + " (Y: " + (ChessBoard.cells[item.y, item.x].figure.startY + 1) + " X: " + (ChessBoard.cells[item.y, item.x].figure.startX + 1) + ")");
                     counter++;
@@ -63,7 +63,7 @@ namespace Chess_Sample
 
                     break;
                 case Type.Knight:
-                    if(currentCell.figure.startY - 2 > 0 || currentCell.figure.startX - 1 > 0)
+                    if(currentCell.figure.startY - 2 > 0 && currentCell.figure.startX - 1 > 0)
                         moves.Add(new Move(currentCell.figure.startY - 2,currentCell.figure.startX - 1));
                     if (currentCell.figure.startY - 2 > 0 && currentCell.figure.startX + 1 < 8)
                         moves.Add(new Move(currentCell.figure.startY - 2, currentCell.figure.startX + 1));
@@ -89,14 +89,22 @@ namespace Chess_Sample
                     Diagonal(ref moves);
                     break;
                 case Type.King:
-                    moves.Add(new Move(currentCell.figure.startY, currentCell.figure.startX - 1));
-                    moves.Add(new Move(currentCell.figure.startY, currentCell.figure.startX + 1));
-                    moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX));
-                    moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX));
-                    moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX - 1));
-                    moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX + 1));
-                    moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX - 1));
-                    moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX + 1));
+                    if(currentCell.figure.startX >= 1)
+                        moves.Add(new Move(currentCell.figure.startY, currentCell.figure.startX - 1));
+                    if (currentCell.figure.startX <= 6)
+                        moves.Add(new Move(currentCell.figure.startY, currentCell.figure.startX + 1));
+                    if(currentCell.figure.startY >= 1)
+                        moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX));
+                    if (currentCell.figure.startY <= 6)
+                        moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX));
+                    if (currentCell.figure.startY >= 1 && currentCell.figure.startX >= 1)
+                        moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX - 1));
+                    if (currentCell.figure.startY >= 1 && currentCell.figure.startX <= 6)
+                        moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX + 1));
+                    if (currentCell.figure.startY <= 6 && currentCell.figure.startX >= 1)
+                        moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX - 1));
+                    if (currentCell.figure.startY <= 6 && currentCell.figure.startX <= 6)
+                        moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX + 1));
                     break;
                 case Type.Pawn:
                     if(currentCell.figure.startY - 1 >= 0 && currentCell.figure.startX - 1 >= 0)
@@ -283,6 +291,7 @@ namespace Chess_Sample
 
             tmp = tmp.OrderByDescending(item => item.startX).ToList();
 
+
             for (int y = currentCell.figure.startY + 1; y >= 0; y--)
             {
                 for (int x = 0; x < currentCell.figure.startX; x++)
@@ -314,7 +323,10 @@ namespace Chess_Sample
             }
             for (int i = 0; i < figureCanBeat.Count; i++)
             {
-                ChessBoard.cells[figureCanBeat[i].y, figureCanBeat[i].x].CanMoveHere(ifCan);
+                if (figureCanBeat[i].y >= 0 && figureCanBeat[i].y <= 7 && figureCanBeat[i].x >= 0 && figureCanBeat[i].x <= 7)
+                {
+                    ChessBoard.cells[figureCanBeat[i].y, figureCanBeat[i].x].CanMoveHere(ifCan);
+                }
             }
         }
 

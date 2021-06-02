@@ -44,11 +44,11 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.RemoveFigure = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.numericUpDown_X_R = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.numericUpDown_Y_R = new System.Windows.Forms.NumericUpDown();
-            this.RemoveFigure = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Y)).BeginInit();
@@ -73,11 +73,11 @@
             this.ClearSelectionButton.UseVisualStyleBackColor = false;
             this.ClearSelectionButton.Click += new System.EventHandler(this.ClearCanMove_Click);
             // 
-            // button2
+            // LoadFromFile
             // 
             this.LoadFromFile.BackColor = System.Drawing.Color.WhiteSmoke;
             this.LoadFromFile.Location = new System.Drawing.Point(212, 21);
-            this.LoadFromFile.Name = "button2";
+            this.LoadFromFile.Name = "LoadFromFile";
             this.LoadFromFile.Size = new System.Drawing.Size(113, 46);
             this.LoadFromFile.TabIndex = 1;
             this.LoadFromFile.Text = "Load File (.txt)";
@@ -215,11 +215,11 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Add Figure";
             // 
-            // button5
+            // SaveInFile
             // 
             this.SaveInFile.BackColor = System.Drawing.Color.WhiteSmoke;
             this.SaveInFile.Location = new System.Drawing.Point(116, 30);
-            this.SaveInFile.Name = "button5";
+            this.SaveInFile.Name = "SaveInFile";
             this.SaveInFile.Size = new System.Drawing.Size(113, 46);
             this.SaveInFile.TabIndex = 12;
             this.SaveInFile.Text = "Save to File (.txt)";
@@ -259,6 +259,17 @@
             this.groupBox5.TabIndex = 15;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Remove Figure";
+            // 
+            // RemoveFigure
+            // 
+            this.RemoveFigure.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.RemoveFigure.Location = new System.Drawing.Point(203, 28);
+            this.RemoveFigure.Name = "RemoveFigure";
+            this.RemoveFigure.Size = new System.Drawing.Size(102, 52);
+            this.RemoveFigure.TabIndex = 14;
+            this.RemoveFigure.Text = "Remove figure";
+            this.RemoveFigure.UseVisualStyleBackColor = false;
+            this.RemoveFigure.Click += new System.EventHandler(this.RemoveFigure_Click);
             // 
             // label3
             // 
@@ -323,17 +334,6 @@
             0,
             0,
             0});
-            // 
-            // button6
-            // 
-            this.RemoveFigure.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.RemoveFigure.Location = new System.Drawing.Point(203, 28);
-            this.RemoveFigure.Name = "button6";
-            this.RemoveFigure.Size = new System.Drawing.Size(102, 52);
-            this.RemoveFigure.TabIndex = 14;
-            this.RemoveFigure.Text = "Remove figure";
-            this.RemoveFigure.UseVisualStyleBackColor = false;
-            this.RemoveFigure.Click += new System.EventHandler(this.RemoveFigure_Click);
             // 
             // listBox
             // 
