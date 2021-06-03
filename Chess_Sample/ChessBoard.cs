@@ -18,6 +18,7 @@ namespace Chess_Sample
 
         public static List<string> figuresCanBeat;
 
+        /*збирає інформацію про те які фігури б'ють одна одну і записує всі в один список*/
         public List<string> CanBeatInfoToListBox()
         {
             figuresCanBeat = new List<string>();
@@ -79,6 +80,7 @@ namespace Chess_Sample
             }
         }
 
+        /*прибирає всі фігури*/
         public void ClearBoard()
         {
             for (int i = 0; i < 8; i++)
@@ -91,9 +93,14 @@ namespace Chess_Sample
             }
             figuresOnBoard = new List<Figure>();
         }
-
+        /*видалає фігуру з шахівниці*/
         public void RemoveFigure(int y, int x)
         {
+            if(figuresOnBoard == null || figuresOnBoard.Count == 1)
+            {
+                MessageBox.Show("You can not remove this figure, on chessboard must be at least one figure");
+                return;
+            }
             if (cells[y, x].figure != null)
             {
                 figuresOnBoard.Remove(cells[y, x].figure);
@@ -102,6 +109,7 @@ namespace Chess_Sample
             }
         }
 
+        /*додає нову фігуру на шахівницю*/
         public void AddNewFigure(string type, int y, int x)
         {
             if(figuresCanBeat == null)
@@ -148,6 +156,7 @@ namespace Chess_Sample
             SetImages();
         }
 
+        /*задає зображення для фігури*/
         private void SetImages()
         {
             for (int x = 0; x < 8; x++)
@@ -159,7 +168,7 @@ namespace Chess_Sample
                 }
             }
         }
-
+        /*прибирає зображення можливості ходу на усіх клітинках*/
         public void ClearCanMove()
         {
             for (int i = 0; i < 8; i++)
@@ -172,6 +181,7 @@ namespace Chess_Sample
             SetImages();
         }
 
+        /*присвоює клітинкам, фігури що на них розташовані*/
         private void SetFigures()
         {
             foreach (var item in figuresOnBoard)
@@ -181,13 +191,13 @@ namespace Chess_Sample
             }
         }
 
-        /*Work with file*/
+        /*обробляє текстовий файл, дістаючи звідти розстановку фігур (path - путь файла на комп'ютері)*/
         public void GetFiguresFromFile(string path)
         {
             try
             {
                 List<string> data = File.ReadAllLines(path).ToList();
-                if (data.Count >= 1 && data.Count <= 10)
+                if (data.Count >= 1 && figuresOnBoard.Count + data.Count <= 10)
                 {
                     foreach (var figure in data)
                     {
@@ -196,15 +206,41 @@ namespace Chess_Sample
                         figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[2]) - 1, Convert.ToInt32(buffer[1]) - 1));
                     }
                 }
-                else if (data.Count > 10)
+                else
                 {
-                    int tmp = figuresOnBoard.Count;
-                    for (int i = 0; i < 10 - tmp; i++)
+                    ClearBoard();
+                    for (int i = 0; i < data.Count && i < 10; i++)
                     {
                         string[] buffer = data[i].Split(' ');
+
                         figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[2]) - 1, Convert.ToInt32(buffer[1]) - 1));
                     }
                 }
+                //else if (figuresOnBoard.Count + data.Count > 10)
+                //{
+                //    if(figuresOnBoard.Count == 10)
+                //    {
+                //        ClearBoard();
+                //        for (int i = 0; i < 10; i++)
+                //        {
+                //            string[] buffer = data[i].Split(' ');
+                //            figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[2]) - 1, Convert.ToInt32(buffer[1]) - 1));
+                //        }
+                //    }
+                //    else
+                //    {
+                //        int tmp = figuresOnBoard.Count;
+                //        for (int i = 0; i < 10 - tmp; i++)
+                //        {
+                //            string[] buffer = data[i].Split(' ');
+                //            figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[2]) - 1, Convert.ToInt32(buffer[1]) - 1));
+                //        }
+                //    }
+                //    //for (int i = 0; i < ; i++)
+                //    //{
+                //    //    figuresOnBoard.Remove(i);
+                //    //}
+                //}
 
                 IfDataCorrect(figuresOnBoard);
             }
@@ -214,6 +250,7 @@ namespace Chess_Sample
             }
         }
 
+        /*зберігає розстановку в файл (path - путь файла на комп'ютері)*/
         public void SaveFiguresToFile(string path)
         {
             List<string> buf = new List<string>();
@@ -227,6 +264,7 @@ namespace Chess_Sample
             File.AppendAllLines(path, buf);
         }
 
+        /*Перевіряє вхідний файл на корректність (figures - фігури які вже розставлені на шахівниці)*/
         private void IfDataCorrect(List<Figure> figures)
         {
             for (int i = 0; i < figures.Count; i++)

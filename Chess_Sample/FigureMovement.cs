@@ -29,6 +29,7 @@ namespace Chess_Sample
 
         public List<string> canbeat;
 
+        /*Описує в список рядків, які фігури дана фігура(що знаходиться на currentCell) може побити*/
         public List<string> CanBeat()
         {
             canbeat = new List<string>();
@@ -53,6 +54,7 @@ namespace Chess_Sample
             return canbeat;
         }
 
+        /*Описує куди може походити дана фігура(що знаходиться на currentCell), залежно від її типу*/
         List<Move> FigureCanMoveHere()
         {
             List<Move> moves = new List<Move>();
@@ -118,6 +120,7 @@ namespace Chess_Sample
             return moves;
         }
 
+        /*знаходить можливі ходи по прямій (для тури, королеви)*/
         private void Line(ref List<Move> buf)
         {
             for (int x = currentCell.figure.startX; x >= 0; x--)
@@ -126,7 +129,7 @@ namespace Chess_Sample
                 {
                     if (x == item.startX && currentCell.figure.startY == item.startY && x != currentCell.figure.startX)
                     {
-                        buf.Add(new Move(currentCell.figure.startY, x)); //
+                        buf.Add(new Move(currentCell.figure.startY, x));
                         goto St5;
                     }
                 }
@@ -142,7 +145,7 @@ namespace Chess_Sample
                 {
                     if (x == item.startX && currentCell.figure.startY == item.startY && x != currentCell.figure.startX)
                     {
-                        buf.Add(new Move(currentCell.figure.startY, x)); //
+                        buf.Add(new Move(currentCell.figure.startY, x));
                         goto St6;
                     }
                 }
@@ -158,7 +161,7 @@ namespace Chess_Sample
                 {
                     if (y == item.startY && currentCell.figure.startX == item.startX && y != currentCell.figure.startY)
                     {
-                        buf.Add(new Move(y, currentCell.figure.startX)); //
+                        buf.Add(new Move(y, currentCell.figure.startX));
                         goto St7;
                     }
                 }
@@ -174,7 +177,7 @@ namespace Chess_Sample
                 {
                     if (y == item.startY && currentCell.figure.startX == item.startX && y != currentCell.figure.startY)
                     {
-                        buf.Add(new Move(y, currentCell.figure.startX)); //
+                        buf.Add(new Move(y, currentCell.figure.startX));
                         goto St8;
                     }
                 }
@@ -186,6 +189,7 @@ namespace Chess_Sample
             return;
         }
 
+        /*знаходить можливі ходи по діагоналям (для слона, королеви)*/
         private void Diagonal(ref List<Move> buf)
         {
             List<Figure> tmp = new List<Figure>();
@@ -312,6 +316,7 @@ namespace Chess_Sample
             return;
         }
 
+        /*додає зображення на місце, куда може походити дана фігура*/
         public void ShowMove(bool ifCan)
         {
             for (int i = 0; i < 8; i++)
@@ -330,7 +335,9 @@ namespace Chess_Sample
             }
         }
 
+        /*перевіряє чи задані координати належать шахівниці*/
         public bool isAccessable(int y, int x) => y < 8 && y >= 0 && x < 8 && x >= 0;
+        /*перевіряє чи є на даній клітинці фігура*/
         public bool isCellEmpty(int y, int x) => ChessBoard.cells[y, x].isEmpty();
     }
 }

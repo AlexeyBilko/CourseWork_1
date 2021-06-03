@@ -23,6 +23,7 @@ namespace Chess_Sample
         Color color;
         public FigureMovement figureMovement;
 
+        /*словник з назвами зображень*/
         public static Dictionary<string, Image> FiguresImages = new Dictionary<string, Image>
         {
             { "BBishop.png",Properties.Resources.Black_Bishop},
@@ -39,6 +40,7 @@ namespace Chess_Sample
             { "WPawn.png",Properties.Resources.White_Pawn }
         };
 
+        /*перевіряє чи є в данній клітинці фігури*/
         public bool isEmpty() => figure == null;
 
         public Cell(byte y, byte x, Color c)
@@ -51,6 +53,7 @@ namespace Chess_Sample
             Location = new Point(x * Size.Width, y * Size.Height);
         }
 
+        /*Відбувається при завантаженні клітинки на шахівницю*/
         private void Cell_Load(object sender, EventArgs e)
         {
             image.BackColor = color;
@@ -61,25 +64,13 @@ namespace Chess_Sample
 
         static int click = 0;
 
+        /*відбувається при натисканні на дану клітинку*/
         private void ClickOnCell(object sender, EventArgs e)
         {
-            //if (figure != null)
-            //{
-            //    for (int x = 0; x < 8; x++)
-            //    {
-            //        for (int y = 0; y < 8; y++)
-            //        {
-            //            if (ChessBoard.cells[y, x].figure != null)
-            //                ChessBoard.cells[y, x].image.BackgroundImage = Cell.FiguresImages[ChessBoard.cells[y, x].figure.GetFigureImageName()];
-            //        }
-            //    }
-            //    image.BackgroundImage = Cell.FiguresImages[figure.getWhiteFigureName()];
-            //    figureMovement = new FigureMovement(this);
-            //    figureMovement.ShowMove(true);
-            //}
             ShowClick();
         }
-        
+
+        /*відображає всі можливі ходи даної фігури*/
         public void ShowClick()
         {
             if (figure != null)
@@ -98,6 +89,7 @@ namespace Chess_Sample
             }
         }
 
+        /*додає на дану клітинку зображення про можливості ходу або про можливість побити фігуру на данній клітинці*/
         public void CanMoveHere(bool can)
         {
             if (image.BackgroundImage != null)
@@ -114,7 +106,7 @@ namespace Chess_Sample
                 }
             }
         }
-
+        /*прибирає зображення можливості ходу*/
         public void ClearCanMove()
         {
             image.Image = null;

@@ -20,7 +20,9 @@ namespace Chess_Sample
         }
 
         ChessBoard board;
+        List<string> list;
 
+        /*Відбувається коли вікно запускається*/
         private void ChessWindow_Load(object sender, EventArgs e)
         {
             board = new ChessBoard(this);
@@ -38,14 +40,13 @@ namespace Chess_Sample
             listBox.Enabled = true;
         }
 
-        //
+        /*Видаляє зображення можливих ходів на шахівниці*/
         private void ClearCanMove_Click(object sender, EventArgs e)
         {
             board.ClearCanMove();
         }
 
-        List<string> list;
-
+        /*Відбувається при натисканні на кнопку, що відкриває вікно для вибору текстового файлу з розстановкою фігур*/
         private void OpenFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog f = new OpenFileDialog();
@@ -67,6 +68,7 @@ namespace Chess_Sample
             }
         }
 
+        /*Прибирає всі фігури з шахівниці*/
         private void ClearBoard_Click(object sender, EventArgs e)
         {
             board.ClearCanMove();
@@ -75,6 +77,7 @@ namespace Chess_Sample
             listBox.Items.Clear();
         }
 
+        /*Відбувається при натисканні на кнопку, що додає нову фігуру на шахівницю*/
         private void AddFigure_Click(object sender, EventArgs e)
         {
             if ((int)numericUpDown_Y.Value >= 1 && (int)numericUpDown_Y.Value <= 8 && (int)numericUpDown_X.Value >= 1 && (int)numericUpDown_X.Value <= 8)
@@ -92,8 +95,14 @@ namespace Chess_Sample
             else return;
         }
 
+        /*Відбувається при натисканні на кнопку, що відкриває вікно для вибору місця куди зберегти розстановку фігур*/
         private void SaveInFile_Click(object sender, EventArgs e)
         {
+            if(ChessBoard.figuresOnBoard == null || ChessBoard.figuresOnBoard.Count < 1)
+            {
+                MessageBox.Show("There are no figures to save");
+                return;
+            }
             SaveFileDialog s = new SaveFileDialog();
             s.Filter = "Text files(*.txt)|*.txt";
             if (s.ShowDialog() == DialogResult.Cancel)
@@ -102,6 +111,7 @@ namespace Chess_Sample
             board.SaveFiguresToFile(filepath);
         }
 
+        /*Відбувається при натисканні на кнопку, що видалає фігуру з шахівниці*/
         private void RemoveFigure_Click(object sender, EventArgs e)
         {
             if ((int)numericUpDown_Y.Value >= 1 && (int)numericUpDown_Y.Value <= 8 && (int)numericUpDown_X.Value >= 1 && (int)numericUpDown_X.Value <= 8)
@@ -118,6 +128,7 @@ namespace Chess_Sample
             else return;
         }
 
+        /*Відбувається при зміненні вибраного елемента в списку*/
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -136,7 +147,7 @@ namespace Chess_Sample
             }
             catch (Exception)
             {
-                MessageBox.Show("Something went wrong");
+                MessageBox.Show("You should click on text");
             }
         }
     }

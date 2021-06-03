@@ -21,11 +21,13 @@ namespace Chess_Sample
             startY = y;
         }
 
+        /*повертає назву білого зображення даної фігури*/
         public string getWhiteFigureName()
         {
             return "W" + figureType.ToString() + ".png";
         }
 
+        /*повертає назву чорного зображення даної фігури*/
         public string GetFigureImageName()
         {
             return "B" + figureType.ToString() + ".png";
