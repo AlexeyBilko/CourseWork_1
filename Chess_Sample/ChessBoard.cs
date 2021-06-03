@@ -208,6 +208,13 @@ namespace Chess_Sample
                 }
                 else
                 {
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            cells[i, j].figure = null;
+                        }
+                    }
                     ClearBoard();
                     for (int i = 0; i < data.Count && i < 10; i++)
                     {

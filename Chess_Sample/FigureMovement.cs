@@ -37,6 +37,16 @@ namespace Chess_Sample
             int counter = 0;
             if (figureCanBeat == null)
                 return null;
+            for (int i = 0; i < figureCanBeat.Count; i++)
+            {
+                for (int j = 0; j < figureCanBeat.Count; j++)
+                {
+                    if(figureCanBeat[i].x == figureCanBeat[j].x && figureCanBeat[i].y == figureCanBeat[j].y && i != j)
+                    {
+                        figureCanBeat.RemoveAt(j);
+                    }
+                }
+            }
             foreach (var item in figureCanBeat)
             {
                 if (item.y >= 0 && item.y <= 7 && item.x >= 0 && item.y <= 7 && ChessBoard.cells[item.y, item.x].figure != null)
