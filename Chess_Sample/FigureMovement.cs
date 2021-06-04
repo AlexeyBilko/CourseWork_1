@@ -75,19 +75,19 @@ namespace Chess_Sample
 
                     break;
                 case Type.Knight:
-                    if(currentCell.figure.startY - 2 > 0 && currentCell.figure.startX - 1 > 0)
+                    if(currentCell.figure.startY - 2 >= 0 && currentCell.figure.startX - 1 >= 0)
                         moves.Add(new Move(currentCell.figure.startY - 2,currentCell.figure.startX - 1));
-                    if (currentCell.figure.startY - 2 > 0 && currentCell.figure.startX + 1 < 8)
+                    if (currentCell.figure.startY - 2 >= 0 && currentCell.figure.startX + 1 < 8)
                         moves.Add(new Move(currentCell.figure.startY - 2, currentCell.figure.startX + 1));
-                    if (currentCell.figure.startY - 1 > 0 && currentCell.figure.startX - 2 > 0)
+                    if (currentCell.figure.startY - 1 >= 0 && currentCell.figure.startX - 2 >= 0)
                         moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX - 2));
-                    if (currentCell.figure.startY - 1 > 0 && currentCell.figure.startX + 2 < 8)
+                    if (currentCell.figure.startY - 1 >= 0 && currentCell.figure.startX + 2 < 8)
                         moves.Add(new Move(currentCell.figure.startY - 1, currentCell.figure.startX + 2));
-                    if (currentCell.figure.startY + 1 < 8 && currentCell.figure.startX - 2 > 0)
+                    if (currentCell.figure.startY + 1 < 8 && currentCell.figure.startX - 2 >= 0)
                         moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX - 2));
                     if (currentCell.figure.startY + 1 < 8 && currentCell.figure.startX + 2 < 8)
                         moves.Add(new Move(currentCell.figure.startY + 1, currentCell.figure.startX + 2));
-                    /**/if (currentCell.figure.startY + 2 < 8 && currentCell.figure.startX - 1 > 0)
+                    if (currentCell.figure.startY + 2 < 8 && currentCell.figure.startX - 1 >= 0)
                         moves.Add(new Move(currentCell.figure.startY + 2, currentCell.figure.startX - 1));
                     if (currentCell.figure.startY + 2 < 8 && currentCell.figure.startX + 1 < 8)
                         moves.Add(new Move(currentCell.figure.startY + 2, currentCell.figure.startX + 1));
