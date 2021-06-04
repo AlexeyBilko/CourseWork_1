@@ -202,8 +202,14 @@ namespace Chess_Sample
                     foreach (var figure in data)
                     {
                         string[] buffer = figure.Split(' ');
-                        
-                        figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[2]) - 1, Convert.ToInt32(buffer[1]) - 1));
+                        if (Convert.ToInt32(buffer[2]) >= 1 && Convert.ToInt32(buffer[2]) <= 8 && Convert.ToInt32(buffer[1]) >= 1 && Convert.ToInt32(buffer[1]) <= 8)
+                            figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[2]) - 1, Convert.ToInt32(buffer[1]) - 1));
+                        else
+                        {
+                            figuresOnBoard = new List<Figure>();
+                            MessageBox.Show("Input data error", "Wrong File!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
                     }
                 }
                 else
@@ -223,32 +229,6 @@ namespace Chess_Sample
                         figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[2]) - 1, Convert.ToInt32(buffer[1]) - 1));
                     }
                 }
-                //else if (figuresOnBoard.Count + data.Count > 10)
-                //{
-                //    if(figuresOnBoard.Count == 10)
-                //    {
-                //        ClearBoard();
-                //        for (int i = 0; i < 10; i++)
-                //        {
-                //            string[] buffer = data[i].Split(' ');
-                //            figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[2]) - 1, Convert.ToInt32(buffer[1]) - 1));
-                //        }
-                //    }
-                //    else
-                //    {
-                //        int tmp = figuresOnBoard.Count;
-                //        for (int i = 0; i < 10 - tmp; i++)
-                //        {
-                //            string[] buffer = data[i].Split(' ');
-                //            figuresOnBoard.Add(new Figure((Type)Enum.Parse(typeof(Type), buffer[0]), Convert.ToInt32(buffer[2]) - 1, Convert.ToInt32(buffer[1]) - 1));
-                //        }
-                //    }
-                //    //for (int i = 0; i < ; i++)
-                //    //{
-                //    //    figuresOnBoard.Remove(i);
-                //    //}
-                //}
-
                 IfDataCorrect(figuresOnBoard);
             }
             catch (Exception)
